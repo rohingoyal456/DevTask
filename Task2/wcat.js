@@ -29,16 +29,16 @@ let priorityForb=0;
 let priorityForn=0;
 for(let i=0;i<optionArray.length;i++)
 {
-    if(optionArray.includes("-n"))
+    if(optionArray[i]=="-n")
     {
         priorityForn=optionArray.length-i;
     }
-    else if(optionArray.includes("-b"))
+    else if(optionArray[i]=="-b")
     {
         priorityForb=optionArray.length-i;
     }
 }
-//file content command print
+// file content command print
 
 for(let i=0;i<fileArray.length;i++)
 {
@@ -95,7 +95,7 @@ if(isPresents)
 
 // -n command code
 let isPresentn=optionArray.includes("-n");
-if((isPresentn && checkForbn==false) || (checkForbn==true && priorityForn>priorityForb))
+if((isPresentn && checkForbn==false) || (checkForbn==true && priorityForn>priorityForb)) 
 {
     console.log("The content of files after -n command:");
     let contentForn=contentappended.split("\r\n");
