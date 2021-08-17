@@ -11,15 +11,17 @@ let types={
 
 function organizefn(pathName)
 {
+    let destPath=o=path.join(pathName,"organized files");
     let allEntities=fs.readdirSync(pathName);
-    fs.mkdirSync(path.join(pathName,"organized files"));   //Organized Files folder created
-
-    for(let key in types)
+    if(fs.existsSync(destPath)==false)
     {
-        fs.mkdirSync(path.join(pathName,"organized files",key));
+        fs.mkdirSync(path.join(pathName,"organized files"));   //Organized Files folder created
+        for(let key in types)
+        {
+            fs.mkdirSync(path.join(pathName,"organized files",key));
+        }
+        fs.mkdirSync(path.join(pathName,"organized files","other"));
     }
-
-    fs.mkdirSync(path.join(pathName,"organized files","other"));
 
     for(let i=0;i<allEntities.length;i++)
     {
@@ -36,6 +38,7 @@ function organizefn(pathName)
                     let destFullPath=path.join(pathName,"organized files",key,tobeCopiedFileName);
                     fs.copyFileSync(sourceFullPath,destFullPath);
                     fileCopied=true;
+                    fs.unlinkSync(sourceFullPath);
                 }
             }
         }
@@ -43,6 +46,7 @@ function organizefn(pathName)
         {
             let destFullPath=path.join(pathName,"organized files","other",tobeCopiedFileName);
             fs.copyFileSync(sourceFullPath,destFullPath);
+            fs.unlinkSync(sourceFullPath);
         }
     }
 
